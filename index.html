@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <title>IMDb Clone</title>
+</head>
+<style>
+
+
+
+</style>
+<body id="body">
+    <!-- navbar -->
+    <nav class="flex v-center">
+        <div><a href="/"><img src="logo.png" width="64" height="32" alt="logo" class="logo"></a></div>
+        <div>
+            <a href="#watchlist-container">My WatchList</a>
+        </div>      
+    </nav>
+
+    <main>
+        <div class="search-wrapper" id="search-wrapper">
+            <div class="search-container"> 
+                <input type="text" id="search" class="search" placeholder="Search IMDb">
+
+                <!-- search lists -->
+                <div class="search-list-container hide" id="search-list-container">
+
+                    <div class="flex search-list v-center hide" id="search-list-0" onclick="searchResult('list0')">
+                        <img width="52" height="62" alt="poster" id="poster0">
+                        <div class="flex-grow movie-name-container" >
+                            <h3><li id="list0" ></li></h3>
+                            <span class="movie-year" id="movie-year-0"></span>
+                        </div>
+                        <span class="material-symbols-outlined add-to-watchlist" id="fav0" onclick="favourite('fav0')">favorite</span>
+                    </div>   
+                    
+                    
+                    
+                    <div class="flex search-list v-center hide" id="search-list-1" onclick="searchResult('list1')">
+                        <img  width="52" height="62" alt="poster" id="poster1">
+                        <div class="flex-grow movie-name-container" >
+                            <li id="list1" class="movie-name" ><h3></h1></li>
+                            <span class="movie-year" id="movie-year-1"></span>
+                        </div>
+                        <span class="material-symbols-outlined add-to-watchlist" id="fav1" onclick="favourite('fav1')">favorite</span>
+                    </div> 
+
+
+
+                    
+                    <div class="flex search-list v-center hide" id="search-list-2" onclick="searchResult('list2')">
+                        <img  width="52" height="62" alt="poster" id="poster2">
+                        <div class="flex-grow movie-name-container" >
+                            <li id="list2" class="movie-name" ><h3></h1></li>
+                            <span class="movie-year" id="movie-year-2"></span>
+                        </div>
+                        <span class="material-symbols-outlined add-to-watchlist" id="fav2" onclick="favourite('fav2')">favorite</span>
+                    </div> 
+
+
+                    
+                    <div class="flex search-list v-center hide" id="search-list-3" onclick="searchResult('list3')">
+                        <img  width="52" height="62" alt="poster" id="poster3">
+                        <div class="flex-grow movie-name-container" >
+                            <li id="list3" class="movie-name" ><h3></h1></li>
+                            <span class="movie-year" id="movie-year-3"></span>
+                        </div>
+                        <span class="material-symbols-outlined add-to-watchlist" id="fav3" onclick="favourite('fav3')">favorite</span>
+                    </div> 
+
+                   
+                </div>
+            </div>
+  
+        </div>  
+
+        <!-- movie details container -->
+        <div id="search-result-container" class="flex hide">
+
+            <div id="result-movie-name" class="flex v-center">
+                <div style="flex-grow: 1;">
+                    <h1 id="result-movie-title">Title</h1>
+                    <h1 id="result-movie-year">Year</h1>
+                </div>
+                <div >
+                    <span class="material-symbols-outlined add-to-watchlist" id="result-favourite" onclick="favourite('result-favourite')">favorite</span>
+                </div>
+
+            </div>
+
+            <div id="result-container" class="flex">
+                <div ><img src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg" id="result-poster" alt="" width="200" height="290"></div>       
+                <div id="result-detail" class="flex">
+                    <p id="result-imdbrating">imdbRating</p>
+                    <p id="result-released">Released</p>
+                    <p id="result-genre">Genre</p>
+                    <p id="result-director">Director</p>
+                    <p id="result-writer">Writer</p>
+                    <p id="result-actors">Actors</p>
+                    <p id="result-plot" style="margin-top: 2rem;">Plot: Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae iure aut, dolore ad, maxime accusantium deleniti eveniet at aperiam consectetur corrupti possimus provident velit.</p>
+                </div>             
+            </div>
+
+           
+        </div>
+
+
+        <!-- watchlist container -->
+        <div id="watchlist-container" class="flex">
+            <h1 id="watchlist-container-heading">Watchlist</h1>
+            <h4 id="nothing-here">Nothing Here Add Something</h4>
+            <div id="watchlist-movie-container" class="watchlist-movie-container flex">
+                <!-- js element goes here when fav is added -->
+            </div>
+            
+        </div>
+    </main>
+    
+
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

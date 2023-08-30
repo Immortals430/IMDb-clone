@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.flex-grow{
+    flex-grow: 1;
+}
+
+.flex{
+    display: flex;
+}
+
+.v-center{
+    align-items: center;
+}
+
+
+body{
+    background-color: #000000;
+}
+
+/* nav bar */
+nav{
+    position: sticky;
+    top: 0;
+    background: #1a1a1a;
+    padding: 0.4rem 2rem;  
+    justify-content: space-between;
+    z-index: 5;
+}
+
+nav a{
+    margin: 0 1rem;
+}
+
+.logo{
+    cursor: pointer;
+}
+
+/* main */
+main{
+    width: 100vw;
+}
+
+/* search input */
+.search-wrapper{
+    width: 50%;
+    margin: 5rem auto;
+}
+
+.search-container{
+    width: 100%;
+    position: relative;
+    
+}
+
+.search{
+    width: 100%;
+    display: block;
+    background-color: #353b49;
+    border: none;
+    border-radius: 50px;
+    padding: 1rem;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    position: relative;
+    z-index: 3;
+}
+
+/* search lists */
+.search-list-container{
+    position: absolute;
+    top: 1.5rem;
+    left: 0;
+    width: 100%;
+    background-color: #353b49;
+    color: white;
+    padding: 2.5rem 0 0;   
+    list-style-type: none;
+}
+
+.search-list{
+    padding: 0.5rem;
+    border: solid 1px black;
+    cursor: pointer;
+
+}
+
+/* movie detail */
+#poster, .movie-name-container{
+    margin: 0.5rem 1rem;
+}
+
+.movie-year{
+    font-size: 0.7rem;
+    font-weight: lighter;
+}
+
+
+.add-to-watchlist{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+}
+
+#search-result-container{
+   
+    flex-flow: column;
+    width: 70%;
+    margin: 5rem auto;
+    color: white;
+    background-color: #353b49;
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+
+#result-movie-name, #result-container, #result-detail{
+    margin: 1rem;
+}
+
+
+#result-movie-name h1{
+    display: inline;
+}
+
+
+#result-detail *{
+    margin: 0.3rem;
+}
+
+#result-detail{
+    flex-flow: column;
+    margin: 0;
+    margin-left: 1rem;
+}
+
+/* Watchlist */
+#watchlist-container{ 
+    width: 70%;
+    background-color: #353b49;
+    margin: 5rem auto;
+    flex-flow: column;
+    align-items: center;
+    border-radius: 20px;
+    padding-bottom: 5rem;
+}
+
+#watchlist-container-heading{
+    margin: 2rem;
+}
+
+.watchlist-movie-container{
+    flex-flow: wrap;
+    cursor: pointer;
+}
+
+.watchlist-movie{
+    margin: 2rem 2.1rem;
+    flex-flow: column;
+    align-items: center;
+    width: 200px;
+    height: 290px;
+
+}
+
+.watchlist-movie-title{
+    padding: 1rem;
+}
+
+
+
+.hide{
+    display: none;    
+}
+
+

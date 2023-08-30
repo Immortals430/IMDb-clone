@@ -1,0 +1,15 @@
+@media only screen and (max-width: 760px){
+
+    .search-wrapper, #watchlist-container,  #search-result-container{
+        width: 90%;
+    }
+
+    #result-container{
+        flex-flow: column;
+    }
+
+    #result-detail{
+        margin: 0;
+    }
+
+}

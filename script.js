@@ -3,7 +3,7 @@ let searchInput = document.getElementById('search');
 
 // search result update as user type movie name
 searchInput.addEventListener('input', async ()=>{
-    let res = await fetch(`http://www.omdbapi.com/?apikey=4f2ea418&s=${searchInput.value}`)
+    let res = await fetch(`https://www.omdbapi.com/?apikey=4f2ea418&s=${searchInput.value}`)
     let data = await res.json()
     let dataArr = data.Search
 

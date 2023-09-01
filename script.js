@@ -25,7 +25,7 @@ searchInput.addEventListener('input', async ()=>{
 async function searchResult(id){
     try{
         let imdb = document.getElementById(id).getAttribute('imdb')
-        let res = await fetch(`http://www.omdbapi.com/?apikey=4f2ea418&i=${imdb}`)
+        let res = await fetch(`https://www.omdbapi.com/?apikey=4f2ea418&i=${imdb}`)
         let data = await res.json()
         
         document.getElementById('search-result-container').classList.remove('hide')
@@ -70,7 +70,7 @@ async function favourite(id) {
         
         try {
 
-            let res = await fetch(`http://www.omdbapi.com/?i=${imdb}&apikey=f47d6a04`);
+            let res = await fetch(`https://www.omdbapi.com/?i=${imdb}&apikey=f47d6a04`);
             let data = await res.json();
             
             document.getElementById('nothing-here').classList.add('hide')

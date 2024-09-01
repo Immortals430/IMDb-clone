@@ -1,100 +1,139 @@
-let favouriteList = []
-let searchInput = document.getElementById('search');
+let watchlist = [];
 
-// search result update as user type movie name
-searchInput.addEventListener('input', async ()=>{
-    let res = await fetch(`http://www.omdbapi.com/?apikey=4f2ea418&s=${searchInput.value}`)
-    let data = await res.json()
-    let dataArr = data.Search
-
-    if(data.Response == 'True'){
-        document.getElementById('search-list-container').classList.remove('hide')  // 
-        for(i = 0; i <= 3; i++){
-            document.getElementById(`search-list-${i}`).classList.remove('hide')
-            document.getElementById(`list${i}`).setAttribute('imdb', `${dataArr[i].imdbID}`)
-            document.getElementById(`fav${i}`).setAttribute('imdb', `${dataArr[i].imdbID}`)
-            document.getElementById(`poster${i}`).src = dataArr[i].Poster
-            document.getElementById(`movie-year-${i}`).innerText = dataArr[i].Year
-            document.getElementById(`list${i}`).innerText = dataArr[i].Title
-        }
-    }  
-})
-
-
-// search List
-async function searchResult(id){
-    try{
-        let imdb = document.getElementById(id).getAttribute('imdb')
-        let res = await fetch(`http://www.omdbapi.com/?apikey=4f2ea418&i=${imdb}`)
-        let data = await res.json()
-        
-        document.getElementById('search-result-container').classList.remove('hide')
-        document.getElementById('result-movie-title').innerText = data.Title
-        document.getElementById(`result-movie-year`).innerText = '(' + data.Year + ')'
-        document.getElementById(`result-poster`).src = data.Poster
-        document.getElementById(`result-imdbrating`).innerText = 'IMDb Rating: ' + data.imdbRating
-        document.getElementById(`result-released`).innerText = 'Released: ' + data.Released
-        document.getElementById(`result-genre`).innerText = 'Genere: ' + data.Genre
-        document.getElementById(`result-director`).innerText = 'Director: ' + data.Director
-        document.getElementById(`result-writer`).innerText = 'Writer: ' + data.Writer
-        document.getElementById(`result-actors`).innerText = 'Actors: ' + data.Actors
-        document.getElementById(`result-plot`).innerText = 'Plot: ' + data.Plot
-        document.getElementById('result-favourite').setAttribute('imdb', data.imdbID)
-        window.scrollTo(0, 200);
-    }
-    catch(err){
-        console.log(err)
-    }
-
-
+// initialise function
+function initialise() {
+  const movieInput = document.getElementById("movieInput");
+  movieInput.addEventListener("input", fetchMovie);
+  watchlist = JSON.parse(localStorage.getItem("watchlist"));
 }
 
-// search result disapper if clicked anywhere else in screen
-document.addEventListener('click', ()=>{
-    document.getElementById('search-list-container').classList.add('hide')
-    for(i = 0; i <= 3; i++){
-        document.getElementById(`search-list-${i}`).classList.add('hide')
-        document.getElementById(`list${i}`).innerText = ''
-    }
-})
 
 
-// ADD movies to watchlist
-async function favourite(id) {
-    let imdb = document.getElementById(id).getAttribute('imdb');
 
-    if (favouriteList.includes(imdb)) {
-        console.log('Movie already exists in the list');
+
+// add to watch list
+function addToWatchlistEventListner(elem) {
+  elem.addEventListener("click", (e) => {
+    e.stopPropagation()
+    const elemImdbId = elem.getAttribute("imdbid");
+    const index = watchlist.indexOf(elemImdbId);
+    if (index == -1) {
+      watchlist.push(elemImdbId);
+      elem.innerHTML = "";
+      elem.innerHTML = `<i class="fa-solid fa-bookmark"></i>`;
     } else {
-        favouriteList.push(imdb);
-        
-        try {
-
-            let res = await fetch(`http://www.omdbapi.com/?i=${imdb}&apikey=f47d6a04`);
-            let data = await res.json();
-            
-            document.getElementById('nothing-here').classList.add('hide')
-            let elem = document.createElement('div');
-            elem.className = 'watchlist-movie flex';
-            elem.id = Date.now();
-            elem.setAttribute('imdb', imdb);
-            elem.setAttribute('onclick', `searchResult('${elem.id}')`);
-            elem.innerHTML = `<img src="${data.Poster}" width="200" height="290"><p class="watchlist-movie-title">${data.Title} (${data.Year})</p>`;            
-            document.getElementById('watchlist-movie-container').appendChild(elem);
-   
-        } catch (error) {
-            console.error('Error fetching movie data:', error);
-        }
+      watchlist.splice(index, 1);
+      elem.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
     }
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+  });
 }
 
 
 
 
+// fetch movie list
+async function fetchMovie(e) {
+  let result = await fetch(
+    `http://www.omdbapi.com/?apikey=4f2ea418&s=${e.target.value}`
+  );
+  result = await result.json();
+  result = result.Search;
+  if (result) {
+
+    const container = document.querySelector(".search-results")
+    container.innerHTML = "";
+    container.style.display = "block"
+    for (let i = 0; i <= 3; i++) {
+      updateSearchResult(result[i]);
+    }
+  }
+}
 
 
 
 
+// update movie list
+function updateSearchResult(movie) {
+  let link = document.createElement("a");
+  link.href = "/";
+  let movieElem = document.createElement("div");
+  movieElem.className = "movie";
+  movieElem.setAttribute("imdbid", movie.imdbID);
+  movieElem.addEventListener("click", (event) => openPage(event));
+  // poster
+  const moviePoster = document.createElement("img");
+  moviePoster.src = movie.Poster;
+  // movie details
+  const movieDetails = document.createElement("div");
+  const movieName = document.createElement("h3");
+  movieName.innerText = movie.Title;
+  const movieYear = document.createElement("p");
+  movieYear.innerText = movie.Year;
+  movieDetails.append(movieName, movieYear);
+  // watchlist icon
+  let addToWatchlistElem = document.createElement("span");
+  addToWatchlistElem.setAttribute("imdbid", movie.imdbID);
+  addToWatchlistEventListner(addToWatchlistElem);
+  const watchlistItem = watchlist.find((id) => id === movie.imdbID);
+  if (watchlistItem) {
+    addToWatchlistElem.innerHTML = `<i class="fa-solid fa-bookmark"></i>`;
+  } else {
+    addToWatchlistElem.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
+  }
+
+  movieElem.append(moviePoster, movieDetails, addToWatchlistElem);
+  document.querySelector(".search-results").append(movieElem);
+}
 
 
 
+
+// event for new window
+function openPage(e) {
+  e.preventDefault();
+  const newWindow = window.open("/moviepage.html", "_blank");
+  const imdbID = e.target.getAttribute("imdbid");
+  newWindow.onload = initialiseMoviePage(newWindow, imdbID);
+}
+// append data on new window
+async function initialiseMoviePage(e, imdbID) {
+  let result = await fetch(
+    `http://www.omdbapi.com/?apikey=4f2ea418&i=${imdbID}`
+  );
+  result = await result.json();
+
+  // movie title
+  e.document.getElementById(
+    "moviepage-title"
+  ).innerText = `${result.Title} (${result.Year})`;
+  // watchlist icon
+  let addToWatchlistElem = e.document.getElementById(
+    "moviepage-watchlist-status"
+  );
+  addToWatchlistElem.setAttribute("imdbid", imdbID);
+  const movieid = watchlist.find((elem) => elem === imdbID);
+  if (movieid)
+    addToWatchlistElem.innerHTML = `<i class="fa-solid fa-bookmark"></i>`;
+  else addToWatchlistElem.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
+  addToWatchlistEventListner(addToWatchlistElem);
+  // moviepage poster
+  e.document.getElementById("moviepage-poster").src = result.Poster;
+  // rating
+  e.document.getElementById("moviepage-rating").innerText = result.imdbRating;
+  // released
+  e.document.getElementById("moviepage-released").innerText = result.Released;
+  // genere
+  e.document.getElementById("moviepage-genere").innerText = result.Genre;
+  //director
+  e.document.getElementById("moviepage-director").innerText = result.Director;
+  // writer
+  e.document.getElementById("moviepage-writer").innerText = result.Writer;
+  // actor
+  e.document.getElementById("moviepage-actor").innerText = result.Actors;
+  // plot
+  e.document.getElementById("moviepage-plot").innerText = result.Plot;
+}
+
+
+initialise();

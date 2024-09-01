@@ -35,7 +35,7 @@ function addToWatchlistEventListner(elem) {
 // fetch movie list
 async function fetchMovie(e) {
   let result = await fetch(
-    `http://www.omdbapi.com/?apikey=4f2ea418&s=${e.target.value}`
+    `https://www.omdbapi.com/?apikey=4f2ea418&s=${e.target.value}`
   );
   result = await result.json();
   result = result.Search;
@@ -99,7 +99,7 @@ function openPage(e) {
 // append data on new window
 async function initialiseMoviePage(e, imdbID) {
   let result = await fetch(
-    `http://www.omdbapi.com/?apikey=4f2ea418&i=${imdbID}`
+    `https://www.omdbapi.com/?apikey=4f2ea418&i=${imdbID}`
   );
   result = await result.json();
 

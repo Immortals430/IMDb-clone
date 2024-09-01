@@ -9,7 +9,7 @@ function initialise() {
 // render movie list
 function renderMovies() {
   watchlist.forEach(async (id) => {
-    let result = await fetch(`http://www.omdbapi.com/?apikey=4f2ea418&i=${id}`);
+    let result = await fetch(`https://www.omdbapi.com/?apikey=4f2ea418&i=${id}`);
     result = await result.json();
 
     const movieContainer = document.createElement("div");

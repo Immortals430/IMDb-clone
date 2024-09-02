@@ -4,7 +4,9 @@ let watchlist = [];
 function initialise() {
   const movieInput = document.getElementById("movieInput");
   movieInput.addEventListener("input", fetchMovie);
-  watchlist = JSON.parse(localStorage.getItem("watchlist"));
+  localwatchlist = JSON.parse(localStorage.getItem("watchlist"))
+  if(localwatchlist) watchlist = JSON.parse(localStorage.getItem("watchlist"));
+
 }
 
 
@@ -44,6 +46,7 @@ async function fetchMovie(e) {
     const container = document.querySelector(".search-results")
     container.innerHTML = "";
     container.style.display = "block"
+
     for (let i = 0; i <= 3; i++) {
       updateSearchResult(result[i]);
     }
@@ -59,6 +62,7 @@ function updateSearchResult(movie) {
   link.href = "/";
   let movieElem = document.createElement("div");
   movieElem.className = "movie";
+  console.log(movie)
   movieElem.setAttribute("imdbid", movie.imdbID);
   movieElem.addEventListener("click", (event) => openPage(event));
   // poster

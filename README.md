@@ -3,7 +3,7 @@
 
 IMDb clone using HTML, CSS, and Javascript.
 
-Link to production site: [IMDb clone](https://immortals430.github.io/IMDb-clone/)
+Link to production site: [IMDb clone](https://imdb-clone-immortals430.netlify.app/)
 
 
 ## Features
@@ -13,19 +13,26 @@ Link to production site: [IMDb clone](https://immortals430.github.io/IMDb-clone/
 - Responsive web page
 
 
-
 ## Screenshots
 
 
 <p align="center">
-<img src="https://github.com/Immortals430/IMDb-clone/assets/124674815/71ce0a0d-cdad-4222-aec4-347e0117b0b9" width="468" height="300" />
+<img src="https://github.com/user-attachments/assets/90ecd5da-42fa-42df-9f1e-fa002d25cfde" width="468" height="300" />
 </p>
 
-  
+<br>
+<br>
+
 <p align="center">
-<img src="https://github.com/Immortals430/IMDb-clone/assets/124674815/d52106c5-270b-4fd4-a453-c83cb7d516bc" width="468" height="300" />
+<img src="https://github.com/user-attachments/assets/24326059-21c0-43a1-aa40-454c6966905b" width="468" height="300" />
 </p>
 
+<br>
+<br>
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/e1527e13-70c4-46c1-a5f2-38d10a5210d4" width="468" height="300" />
+</p>
 
 
 

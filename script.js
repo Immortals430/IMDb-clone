@@ -61,7 +61,6 @@ function updateSearchResult(movie) {
   link.href = "/";
   let movieElem = document.createElement("div");
   movieElem.className = "movie";
-  console.log(movie)
   movieElem.setAttribute("imdbid", movie.imdbID);
   movieElem.addEventListener("click", (event) => openPage(event));
   // poster

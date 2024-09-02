@@ -96,7 +96,7 @@ function openPage(e) {
   e.preventDefault();
   const newWindow = window.open("/IMDb-clone/moviepage.html", "_blank");
   const imdbID = e.target.getAttribute("imdbid");
-  newWindow.onload = initialiseMoviePage(newWindow, imdbID);
+  newWindow.onload = () =>{ initialiseMoviePage(newWindow, imdbID); }
 }
 // append data on new window
 async function initialiseMoviePage(e, imdbID) {

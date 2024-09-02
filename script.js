@@ -12,28 +12,6 @@ function initialise() {
 
 
 
-
-// add to watch list
-function addToWatchlistEventListner(elem) {
-  elem.addEventListener("click", (e) => {
-    e.stopPropagation()
-    const elemImdbId = elem.getAttribute("imdbid");
-    const index = watchlist.indexOf(elemImdbId);
-    if (index == -1) {
-      watchlist.push(elemImdbId);
-      elem.innerHTML = "";
-      elem.innerHTML = `<i class="fa-solid fa-bookmark"></i>`;
-    } else {
-      watchlist.splice(index, 1);
-      elem.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
-    }
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
-  });
-}
-
-
-
-
 // fetch movie list
 async function fetchMovie(e) {
   let result = await fetch(
@@ -56,13 +34,33 @@ async function fetchMovie(e) {
 
 
 
+// add to watch list
+function addToWatchlistEventListner(elem) {
+  elem.addEventListener("click", (e) => {
+    e.stopPropagation()
+    const elemImdbId = elem.getAttribute("imdbid");
+    const index = watchlist.indexOf(elemImdbId);
+    if (index == -1) {
+      watchlist.push(elemImdbId);
+      elem.innerHTML = "";
+      elem.innerHTML = `<i class="fa-solid fa-bookmark"></i>`;
+    } else {
+      watchlist.splice(index, 1);
+      elem.innerHTML = `<i class="fa-regular fa-bookmark"></i>`;
+    }
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+  });
+}
+
+
+
+
 // update movie list
 function updateSearchResult(movie) {
   let link = document.createElement("a");
   link.href = "/";
   let movieElem = document.createElement("div");
   movieElem.className = "movie";
-  console.log(movie)
   movieElem.setAttribute("imdbid", movie.imdbID);
   movieElem.addEventListener("click", (event) => openPage(event));
   // poster
@@ -96,9 +94,9 @@ function updateSearchResult(movie) {
 // event for new window
 function openPage(e) {
   e.preventDefault();
-  const newWindow = window.open("/moviepage.html", "_blank");
+  const newWindow = window.open("/IMDb-clone/moviepage.html", "_blank");
   const imdbID = e.target.getAttribute("imdbid");
-  newWindow.onload = initialiseMoviePage(newWindow, imdbID);
+  newWindow.onload = () =>{ initialiseMoviePage(newWindow, imdbID); }
 }
 // append data on new window
 async function initialiseMoviePage(e, imdbID) {

@@ -3,7 +3,7 @@
 
 IMDb clone using HTML, CSS, and Javascript.
 
-Link to production site: [IMDb clone](https://imdb-clone-immortals430.netlify.app/)
+Link to production site: [IMDb clone](https://immortals430.github.io/IMDb-clone/)
 
 
 ## Features
